@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Devi Duwi Susanti | AI & ML Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gradient: linear-gradient(135deg, #7c3aed, #2563eb);
+      --bg-dark: #0f172a;
+      --bg-light: #f9fafb;
+      --text-dark: #e2e8f0;
+      --text-light: #111827;
+      --card-dark: #1e293b;
+      --card-light: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background 0.6s ease, color 0.6s ease;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: var(--gradient);
+      color: white;
+      border-bottom-left-radius: 80px;
+      border-bottom-right-radius: 80px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header img {
+      width: 180px;
+      height: auto;
+      border-radius: 12px;
+      border: 4px solid rgba(255,255,255,0.6);
+      box-shadow: 0 0 30px rgba(255,255,255,0.25);
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    header img:hover {
+      transform: scale(1.05);
+    }
+
+    header h1 {
+      font-size: 2.4em;
+      margin: 18px 0 8px;
+    }
+
+    header p {
+      font-size: 1em;
+      opacity: 0.9;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--card-dark);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(124,58,237,0.35);
+    }
+
+    .card h3 {
+      font-size: 1.4em;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      background: rgba(255,255,255,0.08);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85em;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    /* ===== SLIDING CAROUSEL ===== */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      margin: 15px 0;
+      width: 100%;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s ease;
+      width: 100%;
+    }
+
+    .carousel img {
+      width: 100%;
+      max-width: 750px;
+      max-height: 380px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .carousel .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+    }
+
+    .carousel button {
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      font-size: 1.5em;
+      padding: 4px 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .carousel button:hover {
+      background: rgba(0,0,0,0.8);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #94a3b8;
+      font-size: 0.9em;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--gradient);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--gradient);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <button class="toggle" id="toggle">☀️</button>
+
+  <header>
+    <img src="me.png" alt="Your Photo">
+    <h1>Devi Duwi Susanti</h1>
+    <p>Final-year Informatics Student | Passionate about Machine Learning & Artificial Intelligence</p>
+  </header>
+
+  <section>
+
+    <div class="card">
+      <h3>About Me</h3>
+      <p>
+        I am a final-year Informatics Engineering student at <strong>Trunojoyo Madura University</strong>. 
+        Passionate about <strong>Machine Learning</strong> and <strong>Artificial Intelligence</strong>, 
+        I actively experiment with small AI projects such as NLP, Transformer-based translation, 
+        and AI-assisted analysis using GPT-5-nano models.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Projects</h3>
+
+      <div class="projects">
+
+        <!-- PROJECT 1 -->
+        <div class="card">
+          <strong>Madurese–Indonesian Translator</strong>
+          <div class="carousel" id="c1">
+            <div class="carousel-track">
+              <img src="mt1.png">
+              <img src="mt2.png">
+              <img src="mt3.png">
+            </div>
+            <div class="nav">
+              <button onclick="prev(1)">❮</button>
+              <button onclick="next(1)">❯</button>
+            </div>
+          </div>
+          <p>Transformer-based translation prototype using SentencePiece tokenization (BPE & Unigram).</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">Transformer</span></div>
+        </div>
+
+        <!-- PROJECT 2 -->
+        <div class="card">
+          <strong>Crypto Price Analysis</strong>
+          <div class="carousel" id="c2">
+            <div class="carousel-track">
+              <img src="crypto_teknikal1.png">
+              <img src="crypto_teknikal2.png">
+            </div>
+            <div class="nav">
+              <button onclick="prev(2)">❮</button>
+              <button onclick="next(2)">❯</button>
+            </div>
+          </div>
+          <p>Analysis of crypto price data using OpenAI GPT-5-nano for lightweight AI insights.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">OpenAI GPT</span><span class="tag">ML</span></div>
+        </div>
+
+        <!-- PROJECT 3 -->
+        <div class="card">
+          <strong>Crypto News Analysis</strong>
+          <div class="carousel" id="c3">
+            <div class="carousel-track">
+              <img src="crypto_news1.png">
+              <img src="crypto_news2.png">
+            </div>
+            <div class="nav">
+              <button onclick="prev(3)">❮</button>
+              <button onclick="next(3)">❯</button>
+            </div>
+          </div>
+          <p>Real-time crypto sentiment analysis using OpenAI GPT-5-nano and Cryptonews API.</p>
+          <div class="tags"><span class="tag">Streamlit</span><span class="tag">API</span><span class="tag">OpenAI GPT</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Skills</h3>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">OpenAI GPT-5-nano</span>
+        <span class="tag">Transformer</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">ML basics</span>
+        <span class="tag">HTML, CSS, JS</span>
+        <span class="tag">Flask (basic)</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Contact</h3>
+      <p>If you'd like to collaborate or discuss AI & ML projects, feel free to reach out!</p>
+      <a class="btn" href="mailto:duwisusantidevi@gmail.com">Email Me 📧</a>
+    </div>
+
+  </section>
+
+  <footer>
+    © <span id="year"></span> Devi Duwi Susanti — Portfolio
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const cards = document.querySelectorAll(".card");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("visible");
+      });
+    }, { threshold: 0.2 });
+    cards.forEach(c => observer.observe(c));
+
+    // ===== SLIDING CAROUSEL =====
+    const carousels = ["c1", "c2", "c3"];
+    let positions = { c1: 0, c2: 0, c3: 0 };
+    const interval = 3000;
+
+    function updateCarousel(id) {
+      const carousel = document.getElementById(id);
+      const track = carousel.querySelector(".carousel-track");
+      const width = carousel.clientWidth;
+      track.style.transform = `translateX(${-positions[id] * width}px)`;
+    }
+
+    function next(n) {
+      const id = "c" + n;
+      const carousel = document.getElementById(id);
+      const imgs = carousel.querySelectorAll("img");
+      positions[id] = (positions[id] + 1) % imgs.length;
+      updateCarousel(id);
+    }
+
+    function prev(n) {
+      const id = "c" + n;
+      const carousel = document.getElementById(id);
+      const imgs = carousel.querySelectorAll("img");
+      positions[id] = (positions[id] - 1 + imgs.length) % imgs.length;
+      updateCarousel(id);
+    }
+
+    setInterval(() => {
+      carousels.forEach(id => {
+        const carousel = document.getElementById(id);
+        if (!carousel) return;
+        const imgs = carousel.querySelectorAll("img");
+        positions[id] = (positions[id] + 1) % imgs.length;
+        updateCarousel(id);
+      });
+    }, interval);
+
+    window.addEventListener("resize", () => {
+      carousels.forEach(updateCarousel);
+    });
+
+    // Light/Dark toggle
+    const toggle = document.getElementById("toggle");
+    let light = false;
+    toggle.addEventListener("click", () => {
+      light = !light;
+      document.body.style.background = light ? "var(--bg-light)" : "var(--bg-dark)";
+      document.body.style.color = light ? "var(--text-light)" : "var(--text-dark)";
+      document.querySelectorAll(".card").forEach(card => {
+        card.style.background = light ? "var(--card-light)" : "var(--card-dark)";
+      });
+      toggle.textContent = light ? "🌙" : "☀️";
+    });
+  </script>
+
+</body>
+</html>
